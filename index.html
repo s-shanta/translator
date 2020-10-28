@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        .words{
+            background-color:yellow;
+            width: 300px;
+        }
+    </style>
 </head>
 <body>
-    
-    <div class="words" contenteditable ></div>
+    <button class="btn">Get voice</button>
+    <div class="words" contenteditable >sgjsfg</div>
     <script>
+        const btn = document.querySelector('.btn');
         window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
         const recognition = new SpeechRecognition();
@@ -33,7 +40,10 @@
         });
         
         recognition.addEventListener('end', recognition.start);
-        recognition.start();
+        btn.addEventListener('click',function(){
+            words.textContent = 'start';
+            recognition.start();
+        });
 
     </script>
 </body>
