@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Translator !</title>
+    <title>Document</title>
 </head>
 <body>
-
+    
     <button id='btnGiveCommand'>Give Command!</button>
     <br><br>
     <span id='message'></span>
@@ -20,16 +20,19 @@
     <input id='chkBruce' type="checkbox"> Bruce Banner
     <br>
     <input id='chkNick' type="checkbox"> Nick Fury
-
+    
     <script>
+        var message = document.querySelector('#message');
+
         var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
         var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 
-        var grammar = '#JSGF V1.0';
+        var grammar = '#JSGF V1.0;'
+
         var recognition = new SpeechRecognition();
-        var speechRecognitionGrammarList = new SpeechGrammarList();
-        speechRecognitionGrammarList.addFromString(grammar, 1);
-        recognition.grammars = speechRecognitionGrammarList;
+        var speechRecognitionList = new SpeechGrammarList();
+        speechRecognitionList.addFromString(grammar, 1);
+        recognition.grammars = speechRecognitionList;
         recognition.lang = 'en-US';
         recognition.interimResults = false;
 
@@ -58,7 +61,14 @@
 
         recognition.onerror = function(event) {
             message.textContent = 'Error occurred in recognition: ' + event.error;
-        }    
+        }        
+
+        document.querySelector('#btnGiveCommand').addEventListener('click', function(){
+            recognition.start();
+
+        });
+
+
     </script>
 </body>
 </html>
