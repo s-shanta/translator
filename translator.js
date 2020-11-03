@@ -90,7 +90,7 @@ function runSpeechRecognition() {
   // This runs when the speech recognition service returns result
   recognition.onresult = function(event) {
     var transcript = event.results[0][0].transcript;
-    output.innerHTML = "<b>You've just said : </b> " + transcript ;
+    output.innerHTML = "<b>You have said:</b> " + transcript ;
     output.classList.remove("hide");
     fireBaseInsert(transcript);
   };
