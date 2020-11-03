@@ -1,95 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        body{
-            /* background-color:#BFD4DB; */
-            background-color:black;
-        }
-        .headline{
-            text-align: center;
-            font-weight: 700;
-            color: white;
-        }
-        .translator{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 5 px;
-        }
-        .input-translator{
-            margin: 5px 5px 5px 5px;
-        }
-        #input-text{
-            font-size: 20px;
-            width: 400px;
-            background-color: cornsilk;
-            font-family: 'Caveat', cursive;
-            height:
-        }
-        .output-translator{
-            margin: 5px 5px 5px 5px;
-        }
-        #output-text{
-            font-size: 20px;
-            width: 400px;
-            background-color: cornsilk;
-            font-family: 'Caveat', cursive;
-        }
-    </style>
+  <title>Translator App</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://kit.fontawesome.com/98ee088620.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <div class="container mt-4">
-        <h1 class="headline display-4 tex-center">
-            translator!
-        </h1>
-        <div class="translator">
-            <div class="input-translator">
-                <textarea id="input-text" placeholder="input ..."></textarea>
-                <br>
-                <button id="input-btn">get voice!</button>
-            </div>
-            <div class="output-translator">
-                <textarea id="output-text" placeholder="output ..."></textarea>
-                <br>
-                <button id="output-btn">translated voice!</button>
-            </div>
-        </div>
+  <div class="container">
+    <!--header-->
+  <div id="trans">
+    <h1><span><i class="fa fa-language" aria-hidden="true"></i></span> Voice Translator</h1>
+    <div id="google_translate_element" style='display:none'></div>
+  </div>
+  <div id="toggle-box">
+    <p id="lang">English </p>
+    <label class="switch">
+      <input type="checkbox" id="toggleButton">
+      <span class="slider round"></span>
+    </label>
+    <p id="lang">日本語</p>
+  </div>
+  <!--main box-->
+  <div id="speak-listen-box" >
+    <div id="speak-box">
+      <button type="button" id="speak"><span><i class="fas fa-microphone-alt"></i></span></button>
+      <p><span id="speak-action"><small>click the button and speak...</small></span></p>
+      <div id="speakingoutput"></div>
     </div>
-    <script>
-        const inputBtn = document.querySelector('#input-btn');
-        const inputWords = document.querySelector('#input-text');
-        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    <div class= "vertical"></div>
+    <div class="listen-box">
+      <button type="button" id="listen"><span><i class="fas fa-headphones"></i></span></button>
+      <p><span id="listen-action"><small>click the button and listen...</small></span></p>
+      <textarea id="listeningoutput"></textarea> 
+    </div>
+  </div>  
+  </div>
+  <!-- <p>Click on the below button and speak something...</p>
+  <p><button type="button" onclick="runSpeechRecognition()">Speech to Text</button> &nbsp; <span id="action"></span></p>
+  <div id="output" class="hide"></div>
 
-        const recognition = new SpeechRecognition();
-        recognition.interimResults = true;
 
-        let p = document.createElement('p');
-        inputWords.appendChild(p);
+  <h2>JavaScript Text to Speech</h2>
+  <div><input type="text" id="text-to-speech" placeholder="Enter text to speak..."/></div>
+  <div id="text-to-speech"></div>
+  <div><button type="button" onclick="textToAudio()">Speak</button></div>
+  <br />
+  <button id="buttonOutput">Text to Speech</button> -->
 
-        recognition.addEventListener('result',e=>{
-            const transcript = Array.from(e.results)
-            .map(result => result[0])
-            .map(result => result.transcript)
-            .join('')
-
-            p.textContent = transcript;
-            if(e.results[0].isFinal){
-                p=document.createElement('p');
-                inputWords.appendChild(p);
-            }
-        });
-        
-        recognition.addEventListener('end', recognition.start);
-        inputBtn.addEventListener('click',function(){
-            inputWords.textContent = 'start';
-            recognition.start();
-        });
-
-    </script>
+  <!-- Javascripts       -->
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+  <script type="text/javascript" src="translator.js"></script>
+  <!-- For Translating -->
+  <script type="text/javascript" src="https://uploads-ssl.webflow.com/5e6cdff43dea835e0d32f309/5e6ce61775d1ae4d0299ac82_translator.txt"></script>
+  <!-- <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
 </body>
+
 </html>
